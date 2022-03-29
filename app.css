@@ -1,0 +1,151 @@
+:root {
+  --half-sqrt-3: 0.8660254037844386;
+
+  --tile-size: 10rem;
+  --border-size: 0.0625rem;
+
+  --tile-height: var(--tile-size);
+  --tile-width: var(--tile-size);
+}
+
+/*! Section: Body */
+
+body {
+  background: var(--bs-dark);
+  color: var(--bs-light);
+}
+
+/*! Section: Grid */
+
+.hex-grid .grid-row,
+.hex-grid .grid-col {
+  display: flex;
+  position: relative;
+}
+
+.hex-grid .grid-col {
+  width: var(--tile-width);
+  height: var(--tile-height);
+
+  /* Fixes the gaps between the tiles. */
+  margin-left: -1px;
+  margin-top: -1px;
+
+  background: hsl(152.2, 68.8%, 30%);
+}
+
+.hex-grid .grid-col label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*! Section: Cube */
+
+.ground::before,
+.ground::after {
+  display: block;
+  position: absolute;
+
+  content: "";
+}
+
+.ground::after {
+  height: calc(0.6 * var(--half-sqrt-3) * var(--tile-size));
+
+  top: 100%;
+  left: 0;
+  right: 0;
+
+  background-color: hsl(29.2, 40.2%, 50%);
+
+  transform: skew(45deg);
+  transform-origin: top left;
+}
+
+.ground::before {
+  width: calc(0.6 * var(--half-sqrt-3) * var(--tile-size));
+
+  left: 100%;
+  top: 0;
+  bottom: 0;
+
+  background-color: hsl(29.2, 40.2%, 60%);
+
+  transform: skewY(45deg);
+  transform-origin: top left;
+}
+
+/*! Section: Isometric */
+
+.isometric {
+  transform: rotateX(60deg) rotateZ(45deg);
+  transform-style: preserve-3d;
+}
+
+.isometric .grid-col img {
+  transform: rotateZ(-45deg) rotateX(-60deg);
+  transform-style: preserve-3d;
+}
+
+/*! Section: Borders */
+
+.borders .grid-col,
+.borders .ground::before,
+.borders .ground::after {
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+}
+
+.borders .grid-col {
+  border: var(--border-size) solid hsl(152.2, 68.8%, 20%);
+}
+
+.borders .ground::before,
+.borders .ground::after {
+  border: var(--border-size) solid hsl(29.2, 40.2%, 40%);
+}
+
+/*! Section: Offset grids */
+
+.offset-even-r {
+  --tile-height: calc(var(--half-sqrt-3) * var(--tile-size));
+}
+
+.offset-even-q {
+  --tile-width: calc(var(--half-sqrt-3) * var(--tile-size));
+}
+
+.offset-even-q .grid-col:nth-child(even) {
+  margin-top: calc(var(--tile-height) * -0.5);
+}
+
+.offset-even-r .grid-row:nth-child(even) {
+  margin-left: calc(var(--tile-width) * -0.5);
+}
+
+/*! Section: Elevation */
+
+.grid-col[data-elevation="1"] {
+  left: -1rem;
+  top: -1rem;
+}
+
+.grid-col[data-elevation="2"] {
+  left: -2rem;
+  top: -2rem;
+}
+
+.grid-col[data-elevation="3"] {
+  left: -3rem;
+  top: -3rem;
+}
+
+.grid-col[data-elevation="4"] {
+  left: -4rem;
+  top: -4rem;
+}
+.grid-col[data-elevation="5"] {
+  left: -5rem;
+  top: -5rem;
+}
