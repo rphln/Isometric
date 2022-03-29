@@ -74,8 +74,6 @@ body {
   left: 0;
   right: 0;
 
-  filter: brightness(80%);
-
   transform: skew(45deg);
   transform-origin: top left;
 }
@@ -89,6 +87,8 @@ body {
 
   transform: skewY(45deg);
   transform-origin: top left;
+
+  filter: brightness(80%);
 }
 
 /*! Section: Isometric */
