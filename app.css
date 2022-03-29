@@ -1,7 +1,7 @@
 :root {
   --half-sqrt-3: 0.8660254037844386467637231707529361834714026269051903140279034897;
 
-  --tile-size: 10rem;
+  --tile-size: 8rem;
   --border-size: 0.0625rem;
 
   --tile-height: var(--tile-size);
@@ -17,7 +17,7 @@ body {
   color: var(--bs-light);
 }
 
-/*! Section: Transform */
+/*! Section: 3D */
 
 *,
 :before,
