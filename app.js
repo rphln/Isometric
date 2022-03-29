@@ -15,6 +15,7 @@ class App extends Component {
     isIsometric: true,
     isOffset: true,
     isLabeled: true,
+    isWireframe: true,
     avatarPosition: { x: 0, y: 0 },
   };
 
@@ -43,11 +44,23 @@ class App extends Component {
     );
     this.linkEventListener("isOffset", document.getElementById("is-offset"));
     this.linkEventListener("isLabeled", document.getElementById("is-labeled"));
+    this.linkEventListener(
+      "isWireframe",
+      document.getElementById("is-wireframe")
+    );
   }
 
   render(
     {},
-    { isCuboid, isBordered, isIsometric, isOffset, isLabeled, avatarPosition }
+    {
+      isCuboid,
+      isBordered,
+      isIsometric,
+      isOffset,
+      isLabeled,
+      isWireframe,
+      avatarPosition,
+    }
   ) {
     return HexGrid({
       height: 7,
@@ -57,7 +70,7 @@ class App extends Component {
       isIsometric,
       isOffset,
       isLabeled,
-
+      isWireframe,
       avatarPosition,
       onTileClick: (avatarPosition) => {
         this.setState({ avatarPosition });
@@ -74,13 +87,14 @@ function HexGrid({
   isIsometric,
   isOffset,
   isLabeled,
+  isWireframe,
   avatarPosition,
   onTileClick,
 }) {
   return html`<div
     class="hex-grid ${isIsometric && "is-isometric"} ${isOffset &&
     "is-offset-even-r"} ${isBordered && "is-bordered"} ${isCuboid &&
-    "is-cuboid"} ${isLabeled && "is-labeled"}"
+    "is-cuboid"} ${isLabeled && "is-labeled"} ${isWireframe && "is-wireframe"}"
   >
     ${range(height).map(
       (y) =>

@@ -136,6 +136,14 @@ body {
   background: url("images/dirt-dark.png") repeat;
 }
 
+/*! Section: Wireframe */
+
+.hex-grid.is-wireframe .grid-col,
+.hex-grid.is-wireframe .grid-col::before,
+.hex-grid.is-wireframe .grid-col::after {
+  background: transparent;
+}
+
 /*! Section: Borders */
 
 .hex-grid.is-bordered .grid-col {

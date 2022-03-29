@@ -45,8 +45,10 @@
   </head>
 
   <body>
-    <menu class="container py-5">
-      <div class="form-check form-switch form-check-inline mx-2">
+    <menu
+      class="container py-5 d-flex justify-content-center align-items-cente"
+    >
+      <div class="form-check form-switch form-check-inline mx-4">
         <label class="form-check-label">
           <input
             id="is-isometric"
@@ -57,7 +59,7 @@
           Isometric?
         </label>
       </div>
-      <div class="form-check form-switch form-check-inline mx-2">
+      <div class="form-check form-switch form-check-inline mx-4">
         <label class="form-check-label">
           <input
             id="is-offset"
@@ -68,7 +70,7 @@
           Offset?
         </label>
       </div>
-      <div class="form-check form-switch form-check-inline mx-2">
+      <div class="form-check form-switch form-check-inline mx-4">
         <label class="form-check-label">
           <input
             id="is-bordered"
@@ -79,7 +81,7 @@
           Borders?
         </label>
       </div>
-      <div class="form-check form-switch form-check-inline mx-2">
+      <div class="form-check form-switch form-check-inline mx-4">
         <label class="form-check-label">
           <input
             id="is-cuboid"
@@ -90,7 +92,7 @@
           Cuboid?
         </label>
       </div>
-      <div class="form-check form-switch form-check-inline mx-2">
+      <div class="form-check form-switch form-check-inline mx-4">
         <label class="form-check-label">
           <input
             id="is-labeled"
@@ -99,6 +101,12 @@
             checked
           />
           Labels?
+        </label>
+      </div>
+      <div class="form-check form-switch form-check-inline mx-4">
+        <label class="form-check-label">
+          <input id="is-wireframe" class="form-check-input" type="checkbox" />
+          Wireframe?
         </label>
       </div>
     </menu>
