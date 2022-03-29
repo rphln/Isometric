@@ -63,8 +63,8 @@ class App extends Component {
     }
   ) {
     return HexGrid({
-      height: 7,
-      width: 7,
+      height: 8,
+      width: 8,
       isCuboid,
       isBordered,
       isIsometric,
