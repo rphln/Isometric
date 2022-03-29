@@ -169,13 +169,20 @@ body {
 .hex-grid .grid-col {
   top: 0;
   left: 0;
-
-  transition: top var(--transition), left var(--transition);
 }
 
-.hex-grid .grid-col:hover {
-  left: calc(-0.6 * var(--cuboid-depth));
-  top: calc(-0.6 * var(--cuboid-depth));
+.hex-grid .grid-col.is-raised {
+  left: calc(-0.4 * var(--cuboid-depth));
+  top: calc(-0.4 * var(--cuboid-depth));
+}
 
+.hex-grid .grid-col.is-lowered {
+  left: calc(0.4 * var(--cuboid-depth));
+  top: calc(0.4 * var(--cuboid-depth));
+}
+
+/*! Section: Mouse */
+
+.hex-grid .grid-col {
   cursor: pointer;
 }
