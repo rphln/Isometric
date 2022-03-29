@@ -55,14 +55,16 @@ body {
 
 /*! Section: Cuboid */
 
+.hex-grid .grid-col {
+  --cuboid-depth: calc(0.6 * min(var(--tile-width), var(--tile-height)));
+}
+
 .hex-grid.is-cuboid .grid-col::before,
 .hex-grid.is-cuboid .grid-col::after {
   content: "";
 
   display: block;
   position: absolute;
-
-  --cuboid-depth: calc(0.6 * min(var(--tile-width), var(--tile-height)));
 }
 
 .hex-grid.is-cuboid .grid-col::after {
@@ -164,8 +166,8 @@ body {
 }
 
 .hex-grid .grid-col:hover {
-  left: -2rem;
-  top: -2rem;
+  left: calc(-0.6 * var(--cuboid-depth));
+  top: calc(-0.6 * var(--cuboid-depth));
 
   cursor: pointer;
 }
