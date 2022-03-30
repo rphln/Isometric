@@ -137,11 +137,13 @@ body {
 
 .hex-grid .grid-col {
   background: url("images/grass.png") repeat;
+  outline: solid hsl(145, 63%, 40%) var(--border-size);
 }
 
 .hex-grid .grid-col::before,
 .hex-grid .grid-col::after {
   background: url("images/dirt-dark.png") repeat;
+  outline: solid hsl(26, 51%, 50%) var(--border-size);
 }
 
 /*! Section: Wireframe */
@@ -154,13 +156,10 @@ body {
 
 /*! Section: Borders */
 
-.hex-grid.is-bordered .grid-col {
-  outline: solid hsl(145, 63%, 40%) var(--border-size);
-}
-
-.hex-grid.is-bordered .grid-col::before,
-.hex-grid.is-bordered .grid-col::after {
-  outline: solid hsl(26, 51%, 50%) var(--border-size);
+.hex-grid:not(.is-bordered) .grid-col,
+.hex-grid:not(.is-bordered) .grid-col::before,
+.hex-grid:not(.is-bordered) .grid-col::after {
+  outline: none;
 }
 
 /*! Section: Sewing */
