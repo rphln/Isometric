@@ -23,10 +23,12 @@ body {
 :before,
 :after {
   transform-style: inherit;
+  backface-visibility: inherit;
 }
 
 .hex-grid {
   transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 /*! Section: Grid */
@@ -42,11 +44,14 @@ body {
   height: var(--tile-height);
 }
 
+.hex-grid .grid-col img,
 .hex-grid .grid-col label {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+
+  bottom: 50%;
+  right: 50%;
+
+  transform: translate(50%, 50%);
 }
 
 .hex-grid:not(.is-labeled) .grid-col label {
@@ -97,14 +102,17 @@ body {
   transform: rotateX(60deg) rotateZ(45deg);
 }
 
-.hex-grid.is-isometric .grid-col img {
-  position: absolute;
+.hex-grid.is-isometric .grid-col .is-2d {
+  /* Removes the blur produced by the transforms. */
+  filter: blur(0);
 
-  top: 50%;
-  left: 50%;
-
-  transform: translate(-50%, -50%) translateZ(2rem) rotateZ(-45deg)
-    rotateX(-60deg);
+  /**
+   * The first `translate` places the element's bottom center exactly at the center of the tile.
+   * Then, we shift it a bit to the bottom --- because it looks better that way.
+   * The third translation (`translateY`) shifts the image back up to the middle of the tile.
+   */
+  transform: translate(50%, 50%) translate(25%, 25%) rotateZ(-45deg)
+    rotateX(-60deg) translateY(-50%);
 }
 
 /*! Section: Offset grids */

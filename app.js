@@ -105,7 +105,7 @@ function HexGrid({
               onClick=${() => onTileClick && onTileClick({ x, y })}
             >
               ${isEqual(avatarPosition, { x, y })
-                ? html`<img src="images/alien.png" />`
+                ? html`<img class="is-2d" alt="alien" src="images/alien.png" />`
                 : html`<label>${y}:${x}</label>`}
             </div>`
           )}
