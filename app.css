@@ -103,9 +103,6 @@ body {
 }
 
 .hex-grid.is-isometric .grid-col .is-2d {
-  /* Removes the blur produced by the transforms. */
-  filter: blur(0);
-
   /**
    * The first `translate` places the element's bottom center exactly at the center of the tile.
    * Then, we shift it a bit to the bottom --- because it looks better that way.
@@ -113,6 +110,9 @@ body {
    */
   transform: translate(50%, 50%) translate(25%, 25%) rotateZ(-45deg)
     rotateX(-60deg) translateY(-50%);
+
+  /* Removes the blur produced by the transforms. */
+  filter: blur(0);
 }
 
 /*! Section: Offset grids */
