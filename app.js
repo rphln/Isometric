@@ -3,110 +3,67 @@ import {
   render,
   Component,
 } from "https://cdn.jsdelivr.net/npm/htm@3.1.0/preact/standalone.module.js";
-import {
-  range,
-  isEqual,
-} from "https://cdn.jsdelivr.net/npm/lodash-es@4.17.21/lodash.js";
+
+/**
+ * Returns an array containing all integers in the range `[0, n)`.
+ * @param n The non-inclusive upper bound of the range.
+ * @returns {number[]} An array containing all integers in the range `[0, n)`.
+ */
+const range = (n) => [...Array(n).keys()];
+
+/**
+ * Determines whether two objects are equal.
+ * Their keys must be in the same order.
+ * @param left An object.
+ * @param right An object to compare against.
+ * @returns {boolean} Whether the objects are equal.
+ */
+const isEqual = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 
 class App extends Component {
   state = {
-    isCuboid: true,
-    isBordered: true,
-    isIsometric: true,
-    isOffset: true,
-    isLabeled: true,
-    isWireframe: true,
     avatarPosition: { x: 0, y: 0 },
   };
 
-  linkEventListener(stateKey, element) {
-    const listener = () => {
-      this.setState({
-        [stateKey]: !!element.checked,
-      });
+  render({}, { avatarPosition }) {
+    const getTileContent = (at) => {
+      const characterEmbed = html`<embed
+        type="image/svg+xml"
+        width="96"
+        height="96"
+        class="is-2d"
+        alt="adventurer"
+        title="adventurer"
+        src="images/adventurer.svg"
+      />`;
+
+      return isEqual(at, avatarPosition) ? characterEmbed : "";
     };
 
-    element.addEventListener("change", listener);
-    element.addEventListener("load", listener);
+    const onTileClick = (avatarPosition) => {
+      this.setState({ avatarPosition });
+    };
 
-    return listener();
-  }
-
-  componentDidMount() {
-    this.linkEventListener("isCuboid", document.getElementById("is-cuboid"));
-    this.linkEventListener(
-      "isBordered",
-      document.getElementById("is-bordered")
-    );
-    this.linkEventListener(
-      "isIsometric",
-      document.getElementById("is-isometric")
-    );
-    this.linkEventListener("isOffset", document.getElementById("is-offset"));
-    this.linkEventListener("isLabeled", document.getElementById("is-labeled"));
-    this.linkEventListener(
-      "isWireframe",
-      document.getElementById("is-wireframe")
-    );
-  }
-
-  render(
-    {},
-    {
-      isCuboid,
-      isBordered,
-      isIsometric,
-      isOffset,
-      isLabeled,
-      isWireframe,
-      avatarPosition,
-    }
-  ) {
-    return HexGrid({
+    return Grid({
       height: 10,
       width: 10,
-      isCuboid,
-      isBordered,
-      isIsometric,
-      isOffset,
-      isLabeled,
-      isWireframe,
-      avatarPosition,
-      onTileClick: (avatarPosition) => {
-        this.setState({ avatarPosition });
-      },
+      onTileClick,
+      getTileContent,
     });
   }
 }
 
-function HexGrid({
-  width,
-  height,
-  isCuboid,
-  isBordered,
-  isIsometric,
-  isOffset,
-  isLabeled,
-  isWireframe,
-  avatarPosition,
-  onTileClick,
-}) {
-  return html`<div
-    class="hex-grid ${isIsometric && "is-isometric"} ${isOffset &&
-    "is-offset-even-r"} ${isBordered && "is-bordered"} ${isCuboid &&
-    "is-cuboid"} ${isLabeled && "is-labeled"} ${isWireframe && "is-wireframe"}"
-  >
+function Grid({ width, height, onTileClick, getTileContent }) {
+  return html`<div class="n9-grid is-offset is-isometric is-cuboid">
     ${range(height).map(
       (y) =>
         html`<div class="grid-row">
           ${range(width).map(
             (x) => html`<div
-              class="grid-col at-${y}-${x}"
+              class="grid-col"
               onClick=${() => onTileClick && onTileClick({ x, y })}
             >
-              ${isEqual(avatarPosition, { x, y })
-                ? html`<img class="is-2d" alt="alien" src="images/alien.png" />`
-                : html`<label>${y}:${x}</label>`}
+              ${getTileContent({ x, y })}
             </div>`
           )}
         </div>`
@@ -114,4 +71,4 @@ function HexGrid({
   </div>`;
 }
 
-render(html` <${App} />`, document.getElementById("app"));
+render(html`<${App} />`, document.getElementById("app"));

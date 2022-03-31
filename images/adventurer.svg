@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    image {
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+    }
+  </style>
+  <defs>
+    <!-- Idle -->
+    <image id="idle">
+      <set id="idle0" dur="166ms" begin="0ms;idle12.end + 1s" fill="freeze" attributeName="href" to="adventurer/0.png" />
+      <set id="idle1" dur="166ms" begin="idle0.end" fill="freeze" attributeName="href" to="adventurer/1.png" />
+      <set id="idle2" dur="166ms" begin="idle1.end" fill="freeze" attributeName="href" to="adventurer/2.png" />
+      <set id="idle3" dur="166ms" begin="idle2.end" fill="freeze" attributeName="href" to="adventurer/3.png" />
+      <set id="idle4" dur="166ms" begin="idle3.end" fill="freeze" attributeName="href" to="adventurer/4.png" />
+      <set id="idle5" dur="166ms" begin="idle4.end" fill="freeze" attributeName="href" to="adventurer/5.png" />
+      <set id="idle6" dur="166ms" begin="idle5.end" fill="freeze" attributeName="href" to="adventurer/6.png" />
+      <set id="idle7" dur="166ms" begin="idle6.end" fill="freeze" attributeName="href" to="adventurer/7.png" />
+      <set id="idle8" dur="166ms" begin="idle7.end" fill="freeze" attributeName="href" to="adventurer/8.png" />
+      <set id="idle9" dur="166ms" begin="idle8.end" fill="freeze" attributeName="href" to="adventurer/9.png" />
+      <set id="idle10" dur="166ms" begin="idle9.end" fill="freeze" attributeName="href" to="adventurer/10.png" />
+      <set id="idle11" dur="166ms" begin="idle10.end" fill="freeze" attributeName="href" to="adventurer/11.png" />
+      <set id="idle12" dur="166ms" begin="idle11.end" fill="freeze" attributeName="href" to="adventurer/12.png" />
+    </image>
+    <!-- Attack -->
+    <image id="attack">
+      <set id="attack0" dur="166ms" begin="0ms" fill="freeze" attributeName="href" to="adventurer/39.png" />
+      <set id="attack1" dur="166ms" begin="attack0.end" fill="freeze" attributeName="href" to="adventurer/40.png" />
+      <set id="attack2" dur="166ms" begin="attack1.end" fill="freeze" attributeName="href" to="adventurer/41.png" />
+      <set id="attack3" dur="166ms" begin="attack2.end" fill="freeze" attributeName="href" to="adventurer/42.png" />
+      <set id="attack4" dur="166ms" begin="attack3.end" fill="freeze" attributeName="href" to="adventurer/43.png" />
+      <set id="attack5" dur="166ms" begin="attack4.end" fill="freeze" attributeName="href" to="adventurer/44.png" />
+      <set id="attack6" dur="166ms" begin="attack5.end" fill="freeze" attributeName="href" to="adventurer/45.png" />
+      <set id="attack7" dur="166ms" begin="attack6.end" fill="freeze" attributeName="href" to="adventurer/46.png" />
+      <set id="attack8" dur="166ms" begin="attack7.end" fill="freeze" attributeName="href" to="adventurer/47.png" />
+      <set id="attack9" dur="166ms" begin="attack8.end" fill="freeze" attributeName="href" to="adventurer/48.png" />
+    </image>
+  </defs>
+  <use href="#idle" />
+</svg>

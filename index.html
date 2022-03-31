@@ -3,22 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <title>N9</title>
-    <meta content="" name="description" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta name="description" content="An experiment." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#212529" />
 
-    <meta content="" property="og:title" />
-    <meta content="" property="og:type" />
-    <meta content="" property="og:url" />
-    <meta content="" property="og:image" />
-
-    <link href="site.webmanifest" rel="manifest" />
-    <link href="icon.png" rel="apple-touch-icon" />
-
-    <!-- Icon from [Twemoji](https://twemoji.twitter.com/), licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) by Twitter. -->
-    <link
-      rel="icon"
-      href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0EwMDQxRSIgZD0iTTQgMTF2LjEzN2MwLS4wNDIuMDExLS4wODQuMDE1LS4xMjZMNCAxMXptMTMgMTEuMTM3Yy0uMTQ2LS4wNjctLjI4Ny0uMTQ1LS40MTItLjI0Nkw0LjU2NSAxMi4yNDVDNC4xODggMTEuOTQgNCAxMS41MzkgNCAxMS4xMzd2MTIuMjM4YzAgMi4wNDIgMS4wOTMgMi40ODQgMS4wOTMgMi40ODRsMTEuNTc0IDkuMDk5Yy4yMDUuMTYxLjM3Ny4yNTkuNTI4LjMxOC0uMTE0LS4xNzQtLjE5NS0uMzc1LS4xOTUtLjYwNFYyMi4xMzd6bS04Ljc3My4zNjNjLS45OTQgMC0yLjAzMy0xLjAwNy0yLjMxOS0yLjI1LS4yODctMS4yNDIuMjg3LTIuMjQ5IDEuMjgtMi4yNDkuOTk0IDAgMi4wMzMgMS4wMDcgMi4zMTkgMi4yNDkuMjg3IDEuMjQzLS4yODYgMi4yNS0xLjI4IDIuMjV6TTEzLjgxIDMwYy0uOTk0IDAtMi4wMzMtMS4wMDgtMi4zMTktMi4yNS0uMjg3LTEuMjQzLjI4Ny0yLjI1IDEuMjgxLTIuMjVzMi4wMzMgMS4wMDcgMi4zMTkgMi4yNWMuMjg2IDEuMjQyLS4yODcgMi4yNS0xLjI4MSAyLjI1eiIvPjxwYXRoIGZpbGw9IiNERDJFNDQiIGQ9Ik0zMS40MzUgMTIuMTYxbC0xMi4xMDQgOS43M2MtLjEwMi4wODMtLjIxNC4xNTItLjMzMS4yMTJ2MTIuNTY5YzAgLjIzMy0uMDgzLjQzNy0uMi42MTQuMTU1LS4wNTguMzM1LS4xNi41NDgtLjMyOCAxLjgyMS0xLjQzMiAxMS41ODgtOS4wOTkgMTEuNTg4LTkuMDk5UzMyIDI1LjQxNyAzMiAyMy4zNzVWMTEuMDUzYzAgLjQwMi0uMTg4LjgwMy0uNTY1IDEuMTA4em0tNy40NTcgMTYuNzMxYy0uMjQyIDEuMTM3LTEuMTE5IDIuMDU4LTEuOTU4IDIuMDU4LS44MzggMC0xLjMyMi0uOTIxLTEuMDgtMi4wNTguMjQyLTEuMTM3IDEuMTE4LTIuMDU4IDEuOTU3LTIuMDU4czEuMzIyLjkyMSAxLjA4MSAyLjA1OHptMy41MzgtNS4yNzFjLS4yNTQgMS4xNzItMS4xNzggMi4xMjEtMi4wNjIgMi4xMjEtLjg4MyAwLTEuMzkyLS45NDktMS4xMzgtMi4xMjEuMjU1LTEuMTcyIDEuMTc5LTIuMTIxIDIuMDYxLTIuMTIxLjg4NSAwIDEuMzk0Ljk0OSAxLjEzOSAyLjEyMXptMy4wNjMtNS4xMDVjLS4yNTEgMS4xMTUtMS4xNjMgMi4wMTctMi4wMzUgMi4wMTctLjg3MiAwLTEuMzc1LS45MDItMS4xMjMtMi4wMTcuMjUxLTEuMTEzIDEuMTYyLTIuMDE2IDIuMDM0LTIuMDE2Ljg3MyAwIDEuMzc2LjkwMyAxLjEyNCAyLjAxNnptMS40MTUtNy41MTFjLjAwMS4wMTYuMDA2LjAzMi4wMDYuMDQ4VjExbC0uMDA2LjAwNXoiLz48cGF0aCBmaWxsPSIjRUE1OTZFIiBkPSJNMzEuNDM1IDkuOTQ1TDE5LjI4OS41Yy0uNzUzLS42MS0xLjk4OC0uNjEtMi43NDIgMEw0LjU2NSAxMC4wMjljLS4zMzguMjczLS41MTUuNjI0LS41NTEuOTgzLS4wMDMuMDQyLS4wMTQuMDgzLS4wMTQuMTI1IDAgLjQwMi4xODguODAzLjU2NSAxLjEwOGwxMi4wMjMgOS42NDZjLjEyNS4xMDEuMjY1LjE3OC40MTIuMjQ2djEyLjUzNWMwIC4yMjkuMDgxLjQzLjE5NC42MDQuMTgxLjI4LjQ2Ni40NzQuODA2LjQ3NC4zMzYgMCAuNjE5LS4xOS44LS40NjQuMTE3LS4xNzYuMi0uMzguMi0uNjE0VjIyLjEwM2MuMTE3LS4wNi4yMjktLjEyOS4zMzEtLjIxMmwxMi4xMDQtOS43M2MuMzc3LS4zMDUuNTY1LS43MDYuNTY1LTEuMTA4IDAtLjAxNi0uMDA1LS4wMzItLjAwNi0uMDQ5LS4wMTQtLjM4NS0uMTk4LS43NjctLjU1OS0xLjA1OXpNMTguNSA4LjY2N2MxLjYxIDAgMi45MTYgMS4wNDQgMi45MTYgMi4zMzMgMCAxLjI4OS0xLjMwNiAyLjMzMy0yLjkxNiAyLjMzMy0xLjYxMSAwLTIuOTE2LTEuMDQ0LTIuOTE2LTIuMzMzIDAtMS4yODkgMS4zMDUtMi4zMzMgMi45MTYtMi4zMzN6Ii8+PGVsbGlwc2UgZmlsbD0iI0ZGRiIgY3g9IjE4LjUiIGN5PSIxMSIgcng9IjIuOTE2IiByeT0iMi4zMzMiLz48cGF0aCBmaWxsPSIjRkZGIiBkPSJNMjkuNDU1IDE2LjVjLS44NzIgMC0xLjc4My45MDMtMi4wMzQgMi4wMTYtLjI1MiAxLjExNS4yNTEgMi4wMTcgMS4xMjMgMi4wMTdzMS43ODQtLjkwMiAyLjAzNS0yLjAxN2MuMjUyLTEuMTEzLS4yNTEtMi4wMTYtMS4xMjQtMi4wMTZ6bS0zLjA3NyA1Yy0uODgzIDAtMS44MDcuOTQ5LTIuMDYxIDIuMTIxLS4yNTQgMS4xNzIuMjU1IDIuMTIxIDEuMTM4IDIuMTIxLjg4NCAwIDEuODA4LS45NDkgMi4wNjItMi4xMjEuMjU0LTEuMTcyLS4yNTUtMi4xMjEtMS4xMzktMi4xMjF6bS0zLjQ4MiA1LjMzNGMtLjgzOSAwLTEuNzE1LjkyMS0xLjk1NyAyLjA1OC0uMjQyIDEuMTM3LjI0MiAyLjA1OCAxLjA4IDIuMDU4LjgzOSAwIDEuNzE2LS45MjEgMS45NTgtMi4wNTguMjQyLTEuMTM3LS4yNDItMi4wNTgtMS4wODEtMi4wNTh6Ii8+PHBhdGggZmlsbD0iI0UxRThFRCIgZD0iTTcuMTg4IDE4LjAwMWMtLjk5NCAwLTEuNTY3IDEuMDA3LTEuMjggMi4yNDkuMjg3IDEuMjQzIDEuMzI1IDIuMjUgMi4zMTkgMi4yNXMxLjU2Ny0xLjAwNyAxLjI4LTIuMjVjLS4yODYtMS4yNDItMS4zMjUtMi4yNDktMi4zMTktMi4yNDl6bTUuNTgzIDcuNDk5Yy0uOTk0IDAtMS41NjcgMS4wMDctMS4yODEgMi4yNS4yODcgMS4yNDIgMS4zMjYgMi4yNSAyLjMyIDIuMjUuOTk0IDAgMS41NjctMS4wMDggMS4yODEtMi4yNS0uMjg3LTEuMjQzLTEuMzI2LTIuMjUtMi4zMi0yLjI1eiIvPjwvc3ZnPg=="
-    />
+    <link rel="icon" href="data:," />
 
     <link
       rel="stylesheet"
@@ -32,82 +21,22 @@
       integrity="sha256-cihOjpB5yHgXFF3xEQ906KKqBAsvw4SSLhjfy0b8H9c="
       crossorigin="anonymous"
     />
-    <link
-      rel="modulepreload"
-      href="https://cdn.jsdelivr.net/npm/lodash-es@4.17.21/lodash.js"
-      integrity="sha256-3Z1lMvgvlTdGQAbkYjupO0D1k+/SNE+X5etUNDAvEdc="
-      crossorigin="anonymous"
-    />
 
-    <meta content="#fafafa" name="theme-color" />
     <link href="app.css" rel="stylesheet" />
+    <link href="theme.css" rel="stylesheet" />
+
     <script defer type="module" src="app.js"></script>
   </head>
-
-  <body>
-    <menu
-      class="container py-5 d-flex justify-content-center align-items-cente"
-    >
-      <div class="form-check form-switch form-check-inline mx-4">
-        <label class="form-check-label">
-          <input
-            id="is-isometric"
-            class="form-check-input"
-            type="checkbox"
-            checked
-          />
-          Isometric?
-        </label>
-      </div>
-      <div class="form-check form-switch form-check-inline mx-4">
-        <label class="form-check-label">
-          <input
-            id="is-offset"
-            class="form-check-input"
-            type="checkbox"
-            checked
-          />
-          Offset?
-        </label>
-      </div>
-      <div class="form-check form-switch form-check-inline mx-4">
-        <label class="form-check-label">
-          <input
-            id="is-bordered"
-            class="form-check-input"
-            type="checkbox"
-            checked
-          />
-          Borders?
-        </label>
-      </div>
-      <div class="form-check form-switch form-check-inline mx-4">
-        <label class="form-check-label">
-          <input
-            id="is-cuboid"
-            class="form-check-input"
-            type="checkbox"
-            checked
-          />
-          Cuboid?
-        </label>
-      </div>
-      <div class="form-check form-switch form-check-inline mx-4">
-        <label class="form-check-label">
-          <input id="is-labeled" class="form-check-input" type="checkbox" />
-          Labels?
-        </label>
-      </div>
-      <div class="form-check form-switch form-check-inline mx-4">
-        <label class="form-check-label">
-          <input id="is-wireframe" class="form-check-input" type="checkbox" />
-          Wireframe?
-        </label>
-      </div>
-    </menu>
+  <body class="is-dark-mode">
     <main class="mx-auto container" id="app"></main>
     <footer class="container d-flex justify-content-center align-items-center">
-      <p>Assets provided by <a href="https://kenney.nl/">Kenney</a>.</p>
+      <p class="mx-3">Terrain by <a href="https://kenney.nl/">Kenney</a></p>
+      <p class="mx-3">
+        Adventurer by <a href="https://elthen.itch.io/">Elthen</a>
+      </p>
+      <p class="mx-3">
+        Code at <a href="https://github.com/rphln/N9">github.com/rphln/N9</a>
+      </p>
     </footer>
   </body>
 </html>

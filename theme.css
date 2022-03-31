@@ -1,0 +1,28 @@
+/*! Section: Body */
+
+body.is-dark-mode {
+  background: var(--bs-dark);
+  color: var(--bs-light);
+}
+
+/*! Section: Backgrounds */
+
+.n9-grid .grid-col {
+  background: url("images/grass.png") repeat;
+}
+
+.n9-grid .grid-col::before,
+.n9-grid .grid-col::after {
+  background: url("images/dirt-dark.png") repeat;
+}
+
+/*! Section: Borders */
+
+.n9-grid .grid-col {
+  outline: solid hsl(145, 63%, 40%) var(--border-size);
+}
+
+.n9-grid .grid-col::before,
+.n9-grid .grid-col::after {
+  outline: solid hsl(26, 51%, 50%) var(--border-size);
+}

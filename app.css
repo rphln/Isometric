@@ -1,90 +1,99 @@
-:root {
-  --half-sqrt-3: 0.8660254037844386467637231707529361834714026269051903140279034897;
+/*! Section: 3D */
 
+*,
+::before,
+::after {
+  transform-style: inherit;
+  backface-visibility: inherit;
+}
+
+.n9-grid {
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+/*! Section: Variables */
+
+.n9-grid {
   --tile-size: 8rem;
   --border-size: 0.0625rem;
 
   --tile-height: var(--tile-size);
   --tile-width: var(--tile-size);
 
-  --transition: 200ms cubic-bezier(0, 0.55, 0.45, 1);
+  /* This is arbitrary. */
+  --tile-depth: calc(0.6 * var(--tile-size));
+
+  /* These are meant to be inverted. */
+  --tile-elevation: calc(-0.4 * var(--tile-depth));
+  --tile-depression: calc(+0.4 * var(--tile-depth));
 }
 
-/*! Section: Body */
+.n9-grid.is-offset {
+  --half-sqrt-3: 0.8660254037844386467637231707529361834714026269051903140279034897;
 
-body {
-  background: var(--bs-dark);
-  color: var(--bs-light);
-}
-
-/*! Section: 3D */
-
-*,
-:before,
-:after {
-  transform-style: inherit;
-  backface-visibility: inherit;
-}
-
-.hex-grid {
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
+  --tile-offset: calc(var(--tile-width) * -0.5);
+  --tile-height: calc(var(--half-sqrt-3) * var(--tile-size));
 }
 
 /*! Section: Grid */
 
-.hex-grid .grid-row,
-.hex-grid .grid-col {
+.n9-grid .grid-row,
+.n9-grid .grid-col {
   display: flex;
   position: relative;
+
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  top: 0;
+  left: 0;
 }
 
-.hex-grid .grid-col {
+.n9-grid .grid-col {
   width: var(--tile-width);
   height: var(--tile-height);
 }
 
-.hex-grid .grid-col img,
-.hex-grid .grid-col label {
-  position: absolute;
+/*! Section: Offset grids */
 
-  bottom: 50%;
-  right: 50%;
-
-  transform: translate(50%, 50%);
+.n9-grid.is-offset .grid-row:nth-child(even) {
+  margin-left: var(--tile-offset);
 }
 
-.hex-grid:not(.is-labeled) .grid-col label {
-  visibility: hidden;
+/*! Section: Remove seams */
+
+.n9-grid .grid-col,
+.n9-grid .grid-col::before,
+.n9-grid .grid-col::after {
+  margin-left: -1px;
+  margin-top: -1px;
+}
+
+/*! Section: Elevation */
+
+.n9-grid.is-cuboid .grid-col.is-lowered {
+  top: var(--tile-depression);
+  left: var(--tile-depression);
+}
+
+.n9-grid.is-cuboid .grid-col.is-raised {
+  top: var(--tile-elevation);
+  left: var(--tile-elevation);
 }
 
 /*! Section: Cuboid */
 
-.hex-grid .grid-col {
-  --cuboid-depth: calc(0.6 * min(var(--tile-width), var(--tile-height)));
-}
-
-.hex-grid.is-cuboid .grid-col::before,
-.hex-grid.is-cuboid .grid-col::after {
+.n9-grid.is-cuboid .grid-col::before,
+.n9-grid.is-cuboid .grid-col::after {
   content: "";
 
   display: block;
   position: absolute;
 }
 
-.hex-grid.is-cuboid .grid-col::after {
-  height: var(--cuboid-depth);
-
-  top: 100%;
-  left: 0;
-  right: 0;
-
-  transform: skew(45deg);
-  transform-origin: top left;
-}
-
-.hex-grid.is-cuboid .grid-col::before {
-  width: var(--cuboid-depth);
+.n9-grid.is-cuboid .grid-col::before {
+  width: var(--tile-depth);
 
   left: 100%;
   top: 0;
@@ -96,100 +105,47 @@ body {
   filter: brightness(80%);
 }
 
+.n9-grid.is-cuboid .grid-col::after {
+  height: var(--tile-depth);
+
+  top: 100%;
+  left: 0;
+  right: 0;
+
+  transform: skew(45deg);
+  transform-origin: top left;
+}
+
 /*! Section: Isometric */
 
-.hex-grid.is-isometric {
+.n9-grid.is-isometric {
   transform: rotateX(60deg) rotateZ(45deg);
 }
 
-.hex-grid.is-isometric .grid-col .is-2d {
+.n9-grid.is-isometric .grid-col .is-2d {
+  position: absolute;
+
+  bottom: 50%;
+  right: 50%;
+
   /**
    * The first `translate` places the element's bottom center exactly at the center of the tile.
-   * Then, we shift it a bit to the bottom --- because it looks better that way.
-   * The third translation (`translateY`) shifts the image back up to the middle of the tile.
+   * The second translation (`translateY`) shifts the image back up to the middle of the tile.
    */
-  transform: translate(50%, 50%) translate(25%, 25%) rotateZ(-45deg)
-    rotateX(-60deg) translateY(-50%);
+  transform: translate(50%, 50%) rotateZ(-45deg) rotateX(-60deg)
+    translateY(-50%);
 
-  /* Removes the blur produced by the transforms. */
+  /* Removes the blur produced by the transforms. Is this a placebo? */
   filter: blur(0);
-}
-
-/*! Section: Offset grids */
-
-.hex-grid.is-offset-even-r {
-  --tile-height: calc(var(--half-sqrt-3) * var(--tile-size));
-}
-
-.hex-grid.is-offset-even-q {
-  --tile-width: calc(var(--half-sqrt-3) * var(--tile-size));
-}
-
-.hex-grid.is-offset-even-q .grid-col:nth-child(even) {
-  margin-top: calc(var(--tile-height) * -0.5);
-}
-
-.hex-grid.is-offset-even-r .grid-row:nth-child(even) {
-  margin-left: calc(var(--tile-width) * -0.5);
-}
-
-/*! Section: Appearance */
-
-.hex-grid .grid-col {
-  background: url("images/grass.png") repeat;
-  outline: solid hsl(145, 63%, 40%) var(--border-size);
-}
-
-.hex-grid .grid-col::before,
-.hex-grid .grid-col::after {
-  background: url("images/dirt-dark.png") repeat;
-  outline: solid hsl(26, 51%, 50%) var(--border-size);
-}
-
-/*! Section: Wireframe */
-
-.hex-grid.is-wireframe .grid-col,
-.hex-grid.is-wireframe .grid-col::before,
-.hex-grid.is-wireframe .grid-col::after {
-  background: transparent;
-}
-
-/*! Section: Borders */
-
-.hex-grid:not(.is-bordered) .grid-col,
-.hex-grid:not(.is-bordered) .grid-col::before,
-.hex-grid:not(.is-bordered) .grid-col::after {
-  outline: none;
-}
-
-/*! Section: Sewing */
-
-.hex-grid .grid-col,
-.hex-grid .grid-col::before,
-.hex-grid .grid-col::after {
-  margin-left: -1px;
-  margin-top: -1px;
-}
-
-/*! Section: Elevation */
-
-.hex-grid .grid-col {
-  top: 0;
-  left: 0;
-}
-
-.hex-grid .grid-col.is-raised {
-  left: calc(-0.4 * var(--cuboid-depth));
-  top: calc(-0.4 * var(--cuboid-depth));
-}
-
-.hex-grid .grid-col.is-lowered {
-  left: calc(0.4 * var(--cuboid-depth));
-  top: calc(0.4 * var(--cuboid-depth));
 }
 
 /*! Section: Mouse */
 
-.hex-grid .grid-col {
+.n9-grid .grid-col {
   cursor: pointer;
+}
+
+.n9-grid .grid-col::before,
+.n9-grid .grid-col::after {
+  pointer-events: none;
 }
