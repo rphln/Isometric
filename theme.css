@@ -26,3 +26,13 @@ body.is-dark-mode {
 .n9-grid .grid-col::after {
   outline: solid hsl(26, 51%, 50%) var(--border-size);
 }
+
+/*! Section: Shadows */
+
+.n9-grid .grid-col.is-lowered {
+  box-shadow: rgba(var(--bs-dark-rgb), 0.3) 0rem -2rem 4rem -1rem inset;
+}
+
+.n9-grid .grid-col.is-raised {
+  box-shadow: rgba(var(--bs-dark-rgb), 0.3) 0rem -1rem 2rem -1rem;
+}
