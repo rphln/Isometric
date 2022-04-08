@@ -4,6 +4,11 @@ import {
   Component,
 } from "https://cdn.jsdelivr.net/npm/htm@3.1.0/preact/standalone.module.js";
 
+import {
+  match,
+  P,
+} from "https://cdn.jsdelivr.net/npm/ts-pattern@4.0.1/dist/index.module.js";
+
 /**
  * Returns an array containing all integers in the range `[0, n)`.
  * @param n The non-inclusive upper bound of the range.
