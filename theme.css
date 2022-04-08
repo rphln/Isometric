@@ -19,20 +19,10 @@ body.is-dark-mode {
 /*! Section: Borders */
 
 .n9-grid .grid-col {
-  outline: solid hsl(145, 63%, 40%) var(--border-size);
+  --outline: hsl(150, 60%, 40%);
 }
 
 .n9-grid .grid-col::before,
 .n9-grid .grid-col::after {
-  outline: solid hsl(26, 51%, 50%) var(--border-size);
-}
-
-/*! Section: Shadows */
-
-.n9-grid .grid-col.is-lowered {
-  box-shadow: rgba(var(--bs-dark-rgb), 0.3) 0rem -2rem 4rem -1rem inset;
-}
-
-.n9-grid .grid-col.is-raised {
-  box-shadow: rgba(var(--bs-dark-rgb), 0.3) 0rem -1rem 2rem -1rem;
+  --outline: hsl(25, 50%, 50%);
 }

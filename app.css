@@ -16,7 +16,7 @@
 
 .n9-grid {
   --tile-size: 8rem;
-  --border-size: 0.0625rem;
+  --border-size: 0rem;
 
   --tile-height: var(--tile-size);
   --tile-width: var(--tile-size);
@@ -68,6 +68,8 @@
 .n9-grid .grid-col::after {
   margin-left: -1px;
   margin-top: -1px;
+
+  outline: solid var(--outline) var(--border-size);
 }
 
 /*! Section: Elevation */
@@ -132,8 +134,7 @@
    * The first `translate` places the element's bottom center exactly at the center of the tile.
    * The second translation (`translateY`) shifts the image back up to the middle of the tile.
    */
-  transform: translate(50%, 50%) rotateZ(-45deg) rotateX(-60deg)
-    translateY(-50%);
+  transform: translate(50%, 50%) rotateZ(-45deg) rotateX(-60deg) translateY(-50%);
 
   /* Removes the blur produced by the transforms. Is this a placebo? */
   filter: blur(0);
@@ -148,4 +149,11 @@
 .n9-grid .grid-col::before,
 .n9-grid .grid-col::after {
   pointer-events: none;
+}
+
+.n9-grid .grid-col:hover,
+.n9-grid .grid-col:hover::before,
+.n9-grid .grid-col:hover::after {
+  /* We can't use `filter: brightness(90%);` here because of the 3D transformations. */
+  box-shadow: rgba(var(--bs-dark-rgb), 0.3) inset 0 0 var(--tile-size) var(--tile-size);
 }
