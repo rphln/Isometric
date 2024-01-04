@@ -27,53 +27,190 @@ const isEqual = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 
 class App extends Component {
   state = {
-    avatarPosition: { x: 0, y: 0 },
+    tiles: {},
   };
 
-  render({}, { avatarPosition }) {
-    const getTileContent = (at) => {
-      const characterEmbed = html`<embed
-        type="image/svg+xml"
-        width="96"
-        height="96"
-        class="is-2d"
-        alt="adventurer"
-        title="adventurer"
-        src="images/adventurer.svg"
-      />`;
+  componentDidMount() {
+    this.ws = new WebSocket("ws://localhost:8001/api");
+    this.ws.addEventListener("message", (event) => {
+      const { type, state, team, events } = JSON.parse(event.data);
 
-      return isEqual(at, avatarPosition) ? characterEmbed : "";
+      switch (type) {
+        case "Bootstrap":
+          return this.#bootstrap({ ...state, team });
+        case "History":
+          return this.#history(events);
+      }
+    });
+  }
+
+  #bootstrap(content) {
+    const tiles = {};
+    for (const character of Object.values(content.characters)) {
+      const [y, x] = character.position;
+      tiles[`${x}:${y}`] = character;
+    }
+
+    this.setState({ ...content, tiles });
+
+    console.log(content);
+  }
+
+  #history(content) {
+    console.log(content);
+  }
+
+  render({}, state) {
+    const current = state.queue?.[0]?.character;
+
+    const onTileClick = ({ x, y }) => {
+      let selected = `${x}:${y}`;
+
+      let message;
+
+      if (!state.tiles[selected]?.key) {
+        message = { type: "Move", position: [y, x] };
+      } else if (state.tiles[selected]?.key === current?.key) {
+        message = { type: "Wait" };
+      } else {
+        message = { type: "Attack", position: [y, x] };
+      }
+
+      this.ws.send(JSON.stringify(message));
     };
 
-    const onTileClick = (avatarPosition) => {
-      this.setState({ avatarPosition });
+    const getTileContent = ({ x, y }) => {
+      const key = `${x}:${y}`;
+      const character = state.tiles[key];
+
+      const healthiness = 100 * (1 - character?.damage / character?.health);
+
+      const characterEmbed = html`<div
+        class="is-2d"
+        style=${{
+          "pointer-events": "none",
+          opacity: current !== character?.key ? "50%" : "100%",
+          "z-index": "100",
+        }}
+      >
+        <img
+          width="96"
+          height="96"
+          alt="${character?.name}"
+          title="${character?.name}"
+          src="assets/characters/${character?.name}.png"
+          class="my-1"
+        />
+        <div
+          style=${{
+            width: "80%",
+            height: "8px",
+            background: "var(--bs-danger)",
+            margin: "0 auto",
+            border: "2px solid var(--bs-dark)",
+          }}
+        >
+          <div
+            style=${{
+              width: `${healthiness}%`,
+              height: "100%",
+              background:
+                character?.team === state.team
+                  ? "var(--bs-success)"
+                  : "var(--bs-warning)",
+            }}
+          ></div>
+        </div>
+      </div>`;
+
+      // return isEqual(at, avatarPosition) ? characterEmbed : "";
+      return !character ? "" : characterEmbed;
     };
 
     return Grid({
-      height: 10,
-      width: 10,
+      height: 5,
+      width: 5,
+      selected: state.selected,
+      queue: state.queue,
+      characters: state.characters,
       onTileClick,
       getTileContent,
     });
   }
 }
 
-function Grid({ width, height, onTileClick, getTileContent }) {
-  return html`<div class="n9-grid is-offset is-isometric is-cuboid">
-    ${range(height).map(
-      (y) =>
-        html`<div class="grid-row">
-          ${range(width).map(
-            (x) => html`<div
-              class="grid-col"
-              onClick=${() => onTileClick && onTileClick({ x, y })}
-            >
-              ${getTileContent({ x, y })}
-            </div>`
-          )}
-        </div>`
-    )}
-  </div>`;
+function Grid({
+  width,
+  height,
+  onTileClick,
+  getTileContent,
+  selected,
+  queue,
+  characters,
+}) {
+  const sortedQueue = queue?.sort((a, b) => {
+    const { round: a_round, priority: a_priority } = a;
+    const { round: b_round, priority: b_priority } = b;
+
+    if (a_round < b_round) {
+      return -1;
+    } else if (a_round > b_round) {
+      return 1;
+    } else {
+      return b_priority - a_priority;
+    }
+  });
+
+  const groupedQueue =
+    sortedQueue?.reduce((acc, { round, priority, character }) => {
+      if (!acc[round]) {
+        acc[round] = [];
+      }
+
+      acc[round].push(character);
+
+      return acc;
+    }, {}) || {};
+
+  return html`
+    <div class="d-flex flex-row">
+      ${Object.entries(groupedQueue).map(([_, round]) => {
+        return html`<div
+          class="d-flex flex-row rpgui-container framed position-relative"
+        >
+          ${round.map((key) => {
+            const character = characters[key];
+            return html`<div class="">
+              <img
+                width="48"
+                height="48"
+                src="assets/characters/avatar-${character?.name}.png"
+                class="mx-2"
+                alt="${character?.name}"
+                title="${character?.name}"
+              />
+            </div>`;
+          })}
+        </div> `;
+      })}
+    </div>
+    <div class="n9-grid is-isometric is-cuboid">
+      ${range(height).map(
+        (y) =>
+          html`<div class="grid-row">
+            ${range(width).map(
+              (x) =>
+                html`<div
+                  class="grid-col ${`${x}:${y}` == selected ? "is-raised" : ""}"
+                  onClick=${() => onTileClick && onTileClick({ x, y })}
+                >
+                  ${getTileContent({ x, y })}
+                </div>`,
+            )}
+          </div>`,
+      )}
+    </div>
+  `;
 }
 
 render(html`<${App} />`, document.getElementById("app"));

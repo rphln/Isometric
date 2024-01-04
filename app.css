@@ -5,6 +5,8 @@
 ::after {
   transform-style: inherit;
   backface-visibility: inherit;
+
+  image-rendering: inherit;
 }
 
 .n9-grid {
@@ -12,17 +14,24 @@
   backface-visibility: hidden;
 }
 
+body {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
 /*! Section: Variables */
 
 .n9-grid {
+  --outline: var(--bs-dark);
+
   --tile-size: 8rem;
-  --border-size: 0rem;
 
   --tile-height: var(--tile-size);
   --tile-width: var(--tile-size);
 
   /* This is arbitrary. */
-  --tile-depth: calc(0.6 * var(--tile-size));
+  --tile-depth: calc(0.7071067812 * var(--tile-size));
 
   /* These are meant to be inverted. */
   --tile-elevation: calc(-0.4 * var(--tile-depth));
@@ -34,6 +43,12 @@
 
   --tile-offset: calc(var(--tile-width) * -0.5);
   --tile-height: calc(var(--half-sqrt-3) * var(--tile-size));
+}
+
+/*! Section: Layout */
+
+.n9-grid {
+  margin: 0 auto;
 }
 
 /*! Section: Grid */
@@ -66,10 +81,10 @@
 .n9-grid .grid-col,
 .n9-grid .grid-col::before,
 .n9-grid .grid-col::after {
-  margin-left: -1px;
-  margin-top: -1px;
+  margin-left: 1px;
+  margin-top: 1px;
 
-  outline: solid var(--outline) var(--border-size);
+  outline: solid 1px var(--outline);
 }
 
 /*! Section: Elevation */
