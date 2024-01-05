@@ -31,7 +31,10 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.ws = new WebSocket("ws://localhost:8001/api");
+    const scheme = window.location.protocol === "https:" ? "wss" : "ws";
+    const url = `${scheme}://${window.location.host}/api`;
+
+    this.ws = new WebSocket(url);
     this.ws.addEventListener("message", (event) => {
       const { type, state, team, events } = JSON.parse(event.data);
 
@@ -64,13 +67,14 @@ class App extends Component {
     const current = state.queue?.[0]?.character;
 
     const onTileClick = ({ x, y }) => {
-      let selected = `${x}:${y}`;
+      const selected = `${x}:${y}`;
+      const current = state.queue?.[0]?.character;
 
       let message;
 
       if (!state.tiles[selected]?.key) {
         message = { type: "Move", position: [y, x] };
-      } else if (state.tiles[selected]?.key === current?.key) {
+      } else if (state.tiles[selected]?.key === current) {
         message = { type: "Wait" };
       } else {
         message = { type: "Attack", position: [y, x] };
@@ -157,7 +161,7 @@ function Grid({
     } else if (a_round > b_round) {
       return 1;
     } else {
-      return b_priority - a_priority;
+      return a_priority - b_priority;
     }
   });
 

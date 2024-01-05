@@ -81,8 +81,8 @@ body {
 .n9-grid .grid-col,
 .n9-grid .grid-col::before,
 .n9-grid .grid-col::after {
-  margin-left: 1px;
-  margin-top: 1px;
+  margin-left: -1px;
+  margin-top: -1px;
 
   outline: solid 1px var(--outline);
 }
@@ -171,4 +171,32 @@ body {
 .n9-grid .grid-col:hover::after {
   /* We can't use `filter: brightness(90%);` here because of the 3D transformations. */
   box-shadow: rgba(var(--bs-dark-rgb), 0.3) inset 0 0 var(--tile-size) var(--tile-size);
+}
+
+/*! Section: Theme */
+
+body.is-dark-mode {
+  background: var(--bs-dark);
+  color: var(--bs-light);
+}
+
+.n9-grid {
+  .grid-col {
+    &,
+    &::before,
+    &::after {
+      color: #b58863;
+      background-color: #f0d9b5;
+    }
+  }
+
+  .grid-row:nth-child(odd) .grid-col:nth-child(even),
+  .grid-row:nth-child(even) .grid-col:nth-child(odd) {
+    &,
+    &::before,
+    &::after {
+      background-color: #b58863;
+      color: #f0d9b5;
+    }
+  }
 }
